@@ -58,7 +58,7 @@ async def select_category_handler(message: Message):
     
     RequestData.data[message.from_id] = {}
     RequestData.data[message.from_id]['problemCategories'] = [id]
-    
+
     await bot.state_dispenser.set(message.from_id, state=State.FULL_NAME_INPUT)
     await message.answer('Введите ФИО')
 
@@ -121,7 +121,7 @@ async def image_selection_handler(message: Message):
 # Ввод адреса
 @bot.on.message(state=State.ADDRESS_INPUT)
 async def address_input_handler(message: Message):
-    RequestData.data[message.from_id]['address'] = message.text
+    RequestData.data[message.from_id]['location'] = message.text
 
     await bot.state_dispenser.set(message.from_id, state=State.DESCRIPTION_INPUT)
     await message.answer('Введите описание')
