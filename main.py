@@ -35,10 +35,13 @@ async def new_request_handler(message: Message):
         categories_json = api.get_categories()
     except:
         return
+
     categories = []
-    for category in categories_json['data']:
+    for i, category in enumerate(categories_json['data']):
         categories.append([category['id'], category['title']])
         categories_keyboard.add(Text(category['title']))
+        if i < 4:
+            categories_keyboard.row()
     categories_keyboard.get_json()
 
     await message.answer('Выберите категорию заявки:'.format(users_info[0].first_name), keyboard=categories_keyboard)
@@ -131,6 +134,15 @@ async def address_input_handler(message: Message):
 @bot.on.message(state=State.DESCRIPTION_INPUT)
 async def description_input_handler(message: Message):
     RequestData.data[message.from_id]['description'] = message.text
+
+    await bot.state_dispenser.set(message.from_id, state=State.EMAIL_INPUT)
+    await message.answer('Введите e-mail')
+
+
+# Ввод электронного адреса
+@bot.on.message(state=State.EMAIL_INPUT)
+async def email_input_handler(message: Message):
+    RequestData.data[message.from_id]['email'] = message.text
 
     await bot.state_dispenser.set(message.from_id, state=State.MENU_SELECTION)
 

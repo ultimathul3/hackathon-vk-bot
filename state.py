@@ -11,3 +11,4 @@ class State(BaseStateGroup):
     IMAGE_SELECTION = auto()
     ADDRESS_INPUT = auto()
     DESCRIPTION_INPUT = auto()
+    EMAIL_INPUT = auto()
