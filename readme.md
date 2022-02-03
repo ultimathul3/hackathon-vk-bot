@@ -1,6 +1,6 @@
 ## Usage
 
-Create `.env` file in the root of project with the following content :
+Create `.env` file in the root of project with the following content:
 
 ```shell
 API_SERVER_URL=YOURSERVERURL
